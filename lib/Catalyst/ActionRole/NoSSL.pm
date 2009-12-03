@@ -1,4 +1,4 @@
-package Catalyst::ActionRole::RequireSSL;
+package  Catalyst::ActionRole::NoSSL;
 
 use Moose::Role;
 use namespace::autoclean;
@@ -7,7 +7,7 @@ our $VERSION = '0.01';
 
 =head1 NAME
 
-Catalyst::ActionRole::RequireSSL - Force an action to be secure only.
+Catalyst::ActionRole::NoSSL - Force an action to be plain.
 
 =head1 SYNOPSIS
 
@@ -24,19 +24,11 @@ around execute => sub {
   my $orig = shift;
   my $self = shift;
   my ($controller, $c) = @_;
-  my $internal = $c->engine->isa("Catalyst::Engine::HTTP");
-  if ($c->req->method eq "POST") {
-    $c->error("Cannot secure request on POST") 
-  }
-  unless(
-    $internal ||
-    $c->req->secure ||
-    $c->req->method eq "POST") {
+  if($c->req->secure) {
     my $uri = $c->req->uri;
-    $uri->scheme('https');
+    $uri->scheme('http');
     $c->res->redirect( $uri );
   } else {
-    $c->log->warn("Would've redirected to secure") if $internal;
     $self->$orig( @_ );
   }
 };
@@ -50,10 +42,6 @@ Simon Elliott E<cpan@papercreatures.com>
 =head1 CONTRIBUTORS
 
 Andy Grundman, <andy@hybridized.org> for the original RequireSSL Plugin
-
-=head1 THANKS
-
-t0m, zamolxes
 
 =head1 BUGS
 
