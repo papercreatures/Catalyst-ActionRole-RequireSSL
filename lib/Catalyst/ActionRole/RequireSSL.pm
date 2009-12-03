@@ -1,7 +1,5 @@
 package Catalyst::ActionRole::RequireSSL;
 
-use warnings;
-use strict;
 use Moose::Role;
 use namespace::autoclean;
 
@@ -42,8 +40,6 @@ around execute => sub {
 
 package  Catalyst::ActionRole::NoSSL;
 
-use warnings;
-use strict;
 use Moose::Role;
 use namespace::autoclean;
 
