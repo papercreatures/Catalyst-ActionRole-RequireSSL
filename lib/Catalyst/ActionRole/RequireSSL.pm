@@ -47,7 +47,7 @@ use strict;
 use Moose::Role;
 use namespace::autoclean;
 
-around match => sub {
+around execute => sub {
   my $orig = shift;
   my $self = shift;
   my ( $c ) = @_;
