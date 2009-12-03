@@ -47,13 +47,10 @@ around execute => sub {
 
 Simon Elliott E<cpan@papercreatures.com>
 
-=head1 CONTRIBUTORS
-
-Andy Grundman, <andy@hybridized.org> for the original RequireSSL Plugin
-
 =head1 THANKS
 
-t0m, zamolxes
+Andy Grundman, <andy@hybridized.org> for the original RequireSSL Plugin
+t0m (Tomas Doran), zamolxes (Bogdan Lucaciu)
 
 =head1 BUGS
 
