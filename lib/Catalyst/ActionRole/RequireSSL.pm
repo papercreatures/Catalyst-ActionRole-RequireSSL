@@ -26,8 +26,8 @@ around execute => sub {
   my ($controller, $c) = @_;
   
   unless(defined $c->config->{require_ssl}->{disabled}) {
-    $c->config->{require_ssl}->{disabled} = 1
-      if $c->engine->isa("Catalyst::Engine::HTTP");
+    $c->config->{require_ssl}->{disabled} = 
+      $c->engine->isa("Catalyst::Engine::HTTP") ? 1 : 0;
   }
 
   if ($c->req->method eq "POST") {
