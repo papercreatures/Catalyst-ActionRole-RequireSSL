@@ -24,19 +24,25 @@ around execute => sub {
   my $orig = shift;
   my $self = shift;
   my ($controller, $c) = @_;
-  my $internal = $c->engine->isa("Catalyst::Engine::HTTP");
+  
+  unless(defined $c->config->{require_ssl}->{disabled}) {
+    $c->config->{require_ssl}->{disabled} = 1
+      if $c->engine->isa("Catalyst::Engine::HTTP");
+  }
+
   if ($c->req->method eq "POST") {
     $c->error("Cannot secure request on POST") 
   }
   unless(
-    $internal ||
+    $c->config->{require_ssl}->{disabled} ||
     $c->req->secure ||
     $c->req->method eq "POST") {
     my $uri = $c->req->uri;
     $uri->scheme('https');
     $c->res->redirect( $uri );
   } else {
-    $c->log->warn("Would've redirected to secure") if $internal;
+    $c->log->warn("Would've redirected to SSL") 
+      if $c->config->{require_ssl}->{disabled};
     $self->$orig( @_ );
   }
 };
