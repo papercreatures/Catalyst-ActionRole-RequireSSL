@@ -1,6 +1,7 @@
 package  Catalyst::ActionRole::NoSSL;
 
 use Moose::Role;
+with 'Catalyst::ActionRole::RequireSSL::Roles';
 use namespace::autoclean;
 
 our $VERSION = '0.01';
@@ -24,7 +25,10 @@ around execute => sub {
   my $orig = shift;
   my $self = shift;
   my ($controller, $c) = @_;
-  if($c->req->secure) {
+  $self->$orig( @_ ) if $self->check_chain($c);
+  if($c->req->secure && 
+    ( $c->req->method ne "POST" || 
+      $c->config->{require_ssl}->{ignore_on_post} )) {
     my $uri = $c->req->uri;
     $uri->scheme('http');
     $c->res->redirect( $uri );

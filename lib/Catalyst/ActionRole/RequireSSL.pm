@@ -1,6 +1,7 @@
 package Catalyst::ActionRole::RequireSSL;
 
 use Moose::Role;
+with 'Catalyst::ActionRole::RequireSSL::Roles';
 use namespace::autoclean;
 
 our $VERSION = '0.01';
@@ -29,14 +30,18 @@ around execute => sub {
     $c->config->{require_ssl}->{disabled} = 
       $c->engine->isa("Catalyst::Engine::HTTP") ? 1 : 0;
   }
-
-  if ($c->req->method eq "POST") {
+#  use Data::Dumper;warn Dumper($c->action);
+  if ($c->req->method eq "POST" && !$c->config->{require_ssl}->{ignore_on_post}) {
     $c->error("Cannot secure request on POST") 
   }
+
   unless(
     $c->config->{require_ssl}->{disabled} ||
     $c->req->secure ||
-    $c->req->method eq "POST") {
+    $c->req->method eq "POST" ||
+    $self->check_chain($c)
+    ) {
+      
     my $uri = $c->req->uri;
     $uri->scheme('https');
     $c->res->redirect( $uri );
