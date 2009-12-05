@@ -1,7 +1,7 @@
 package  Catalyst::ActionRole::NoSSL;
 
 use Moose::Role;
-with 'Catalyst::ActionRole::RequireSSL::Roles';
+with 'Catalyst::ActionRole::RequireSSL::Role';
 use namespace::autoclean;
 
 our $VERSION = '0.01';
