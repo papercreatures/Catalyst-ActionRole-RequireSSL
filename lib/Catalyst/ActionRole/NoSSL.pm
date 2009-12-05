@@ -25,8 +25,8 @@ around execute => sub {
   my $orig = shift;
   my $self = shift;
   my ($controller, $c) = @_;
-  $self->$orig( @_ ) if $self->check_chain($c);
-  if($c->req->secure && 
+
+  if($c->req->secure && $self->check_chain($c) &&
     ( $c->req->method ne "POST" || 
       $c->config->{require_ssl}->{ignore_on_post} )) {
     my $uri = $c->req->uri;

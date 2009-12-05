@@ -30,7 +30,7 @@ around execute => sub {
     $c->config->{require_ssl}->{disabled} = 
       $c->engine->isa("Catalyst::Engine::HTTP") ? 1 : 0;
   }
-#  use Data::Dumper;warn Dumper($c->action);
+  #use Data::Dumper;warn Dumper($c->action);
   if ($c->req->method eq "POST" && !$c->config->{require_ssl}->{ignore_on_post}) {
     $c->error("Cannot secure request on POST") 
   }
@@ -39,9 +39,8 @@ around execute => sub {
     $c->config->{require_ssl}->{disabled} ||
     $c->req->secure ||
     $c->req->method eq "POST" ||
-    $self->check_chain($c)
+    !$self->check_chain($c)
     ) {
-      
     my $uri = $c->req->uri;
     $uri->scheme('https');
     $c->res->redirect( $uri );

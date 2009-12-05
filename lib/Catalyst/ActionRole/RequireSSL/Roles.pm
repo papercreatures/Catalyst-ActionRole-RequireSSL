@@ -12,20 +12,20 @@ has ignore_chain => (
   default =>  sub { [qw/Catalyst::ActionRole::NoSSL Catalyst::ActionRole::RequireSSL/] }, 
 );
 
+#check we are most relevant action
 sub check_chain {
   my ($self,$c) = @_;
-  return $c->stash->{require_ssl}->{skip_to} ne $c->action->private_path
+  return $c->stash->{require_ssl}->{skip_to} eq $self->private_path
     if defined $c->stash->{require_ssl}->{skip_to};
   foreach my $action (reverse @{$c->action->chain}) {
-#    use Data::Dumper;warn Dumper($action->attributes);
     foreach my $role (@{$action->attributes->{Does}}) {
       if(grep {$role eq $_} @{$self->ignore_chain} ) {
         $c->stash->{require_ssl}->{skip_to} = $action->private_path;
-        return 1;
+        return $action->private_path eq $self->private_path;
       }
     }
   }  
-  return 0;
+  return 1;
 }
 
 1;
