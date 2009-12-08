@@ -4,8 +4,6 @@ use Moose::Role;
 with 'Catalyst::ActionRole::RequireSSL::Role';
 use namespace::autoclean;
 
-our $VERSION = '0.01';
-
 =head1 NAME
 
 Catalyst::ActionRole::RequireSSL - Force an action to be secure only.
@@ -18,6 +16,10 @@ Catalyst::ActionRole::RequireSSL - Force an action to be secure only.
 
   sub bar : Local Does('RequireSSL') { ... }
   sub bar : Local Does('NoSSL') { ... }
+  
+=head2 HIERARCHY
+
+You can chain the SSL Roles to allow 
    
 =cut
 

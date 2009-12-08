@@ -4,8 +4,6 @@ use Moose::Role;
 with 'Catalyst::ActionRole::RequireSSL::Role';
 use namespace::autoclean;
 
-our $VERSION = '0.01';
-
 =head1 NAME
 
 Catalyst::ActionRole::NoSSL - Force an action to be plain.
