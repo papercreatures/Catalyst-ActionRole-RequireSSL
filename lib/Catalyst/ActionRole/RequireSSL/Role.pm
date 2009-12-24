@@ -2,6 +2,15 @@ package Catalyst::ActionRole::RequireSSL::Role;
 
 use Moose::Role;
 use namespace::autoclean;
+our $VERSION = '0.02';
+
+=head1 NAME
+
+Catalyst::ActionRole::RequireSSL::Role - Roles.
+
+=head1 SYNOPSIS
+   
+=cut
 
 my @ignore_chain = qw/Catalyst::ActionRole::NoSSL Catalyst::ActionRole::RequireSSL/;
 

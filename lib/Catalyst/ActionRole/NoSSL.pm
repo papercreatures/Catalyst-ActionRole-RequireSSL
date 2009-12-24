@@ -3,6 +3,7 @@ package  Catalyst::ActionRole::NoSSL;
 use Moose::Role;
 with 'Catalyst::ActionRole::RequireSSL::Role';
 use namespace::autoclean;
+our $VERSION = '0.02';
 
 =head1 NAME
 
@@ -39,18 +40,13 @@ around execute => sub {
 
 =head1 AUTHOR
 
-Simon Elliott E<cpan@papercreatures.com>
+Simon Elliott <cpan@papercreatures.com>
 
 =head1 THANKS
 
 Andy Grundman, <andy@hybridized.org> for the original RequireSSL Plugin
-t0m (Tomas Doran), zamolxes (Bogdan Lucaciu)
-
-=head1 THANKS
 
 t0m (Tomas Doran), zamolxes (Bogdan Lucaciu)
-
-=head1 BUGS
 
 =head1 COPYRIGHT & LICENSE
 
