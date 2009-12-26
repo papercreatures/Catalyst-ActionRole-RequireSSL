@@ -51,7 +51,7 @@ around execute => sub {
     $c->res->redirect( $uri );
   } else {
     $c->log->warn("Would've redirected to SSL") 
-      if $c->config->{require_ssl}->{disabled};
+      if $c->config->{require_ssl}->{disabled} && $c->debug;
     $self->$orig( @_ );
   }
 };
