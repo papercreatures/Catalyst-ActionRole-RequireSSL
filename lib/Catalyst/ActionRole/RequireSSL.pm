@@ -34,7 +34,9 @@ around execute => sub {
       $c->engine->isa("Catalyst::Engine::HTTP") ? 1 : 0;
   }
   #use Data::Dumper;warn Dumper($c->action);
-  if ($c->req->method eq "POST" && !$c->config->{require_ssl}->{ignore_on_post}) {
+  if (!$c->req->secure && $c->req->method eq "POST"
+      && !$c->config->{require_ssl}->{ignore_on_post})
+  {
     $c->error("Cannot secure request on POST") 
   }
 
