@@ -3,7 +3,7 @@ package Catalyst::ActionRole::RequireSSL;
 use Moose::Role;
 with 'Catalyst::ActionRole::RequireSSL::Role';
 use namespace::autoclean;
-our $VERSION = '0.02';
+our $VERSION = '0.04';
 
 =head1 NAME
 
@@ -20,7 +20,9 @@ Catalyst::ActionRole::RequireSSL - Force an action to be secure only.
   
 =head2 HIERARCHY
 
-You can chain the SSL Roles to allow 
+You can chain the SSL Roles to allow for enforced combinations such as all
+secure apart from a certain action and vice versa. See the tests to see this
+in action.
    
 =cut
 
