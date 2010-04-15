@@ -2,7 +2,7 @@ package Catalyst::ActionRole::RequireSSL::Role;
 
 use Moose::Role;
 use namespace::autoclean;
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 NAME
 
