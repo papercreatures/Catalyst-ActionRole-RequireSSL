@@ -3,7 +3,7 @@ package  Catalyst::ActionRole::NoSSL;
 use Moose::Role;
 with 'Catalyst::ActionRole::RequireSSL::Role';
 use namespace::autoclean;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 =head1 NAME
 
@@ -31,6 +31,7 @@ around execute => sub {
     my $uri = $c->req->uri;
     $uri->scheme('http');
     $c->res->redirect( $uri );
+    $c->detach();
   } else {
     $self->$orig( @_ );
   }

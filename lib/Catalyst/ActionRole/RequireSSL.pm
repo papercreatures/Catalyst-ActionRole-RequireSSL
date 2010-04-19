@@ -3,7 +3,7 @@ package Catalyst::ActionRole::RequireSSL;
 use Moose::Role;
 with 'Catalyst::ActionRole::RequireSSL::Role';
 use namespace::autoclean;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 =head1 NAME
 
@@ -51,6 +51,7 @@ around execute => sub {
     my $uri = $c->req->uri;
     $uri->scheme('https');
     $c->res->redirect( $uri );
+    $c->detach();
   } else {
     $c->log->warn("Would've redirected to SSL") 
       if $c->config->{require_ssl}->{disabled} && $c->debug;

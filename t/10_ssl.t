@@ -6,7 +6,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::Bin/lib";
 
-use Test::More tests => 26;
+use Test::More tests => 27;
 use Catalyst::Test 'TestApp';
 use HTTP::Request::Common;
 
@@ -21,6 +21,7 @@ is( $res->header('location'), 'http://localhost/root_plain', 'Correct URI' );
 
 ok( $res = request('http://localhost/ssl/ssl'), 'request ok' );
 is( $res->header('location'), 'https://localhost/ssl/ssl', 'Redirected to SSL' );
+is( $res->content, 'Unsecured', "Correctly detached and didn't run action");
 
 ok( $res = request('http://localhost/ssl/ssl?a=1&b=2&c=3'), 'request ok' );
 is( $res->header('location'), 'https://localhost/ssl/ssl?a=1&b=2&c=3', 'SSL with GET' );
