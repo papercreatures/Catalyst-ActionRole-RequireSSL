@@ -48,7 +48,7 @@ around execute => sub {
     $c->req->method eq "POST" ||
     !$self->check_chain($c)
     ) {
-    my $uri = $c->req->uri;
+    my $uri = $c->req->uri->clone;
     $uri->scheme('https');
     $c->res->redirect( $uri );
     $c->detach();
