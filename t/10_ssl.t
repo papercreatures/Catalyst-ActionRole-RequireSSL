@@ -6,20 +6,21 @@ use warnings;
 use FindBin;
 use lib "$FindBin::Bin/lib";
 
-use Test::More tests => 28;
+use Test::More tests => 29;
 use Catalyst::Test 'TestApp';
 use HTTP::Request::Common;
 
 ok( my $res = request('https://localhost/root_ssl'), 'request ok' );
 is( $res->code, 200, 'SSL request to SSL' );
 
-ok( $res = request('https://localhost/root_plain'), 'request ok' );
+my $ctx;
+ok( ($res, $ctx) = ctx_request('https://localhost/root_plain'), 'request ok' );
+is($ctx->request->uri->scheme, 'https');
 is( $res->code, 302, 'SSL request to Plain redirected' );
 is( $res->header('location'), 'http://localhost/root_plain', 'Correct URI' );
 
 #chained tests
 
-my $ctx;
 ok( ($res, $ctx) = ctx_request('http://localhost/ssl/ssl'), 'request ok' );
 is($ctx->request->uri->scheme, 'http');
 is( $res->header('location'), 'https://localhost/ssl/ssl', 'Redirected to SSL' );

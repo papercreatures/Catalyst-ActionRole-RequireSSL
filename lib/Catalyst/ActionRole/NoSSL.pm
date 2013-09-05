@@ -28,7 +28,7 @@ around execute => sub {
   if($c->req->secure && $self->check_chain($c) &&
     ( $c->req->method ne "POST" || 
       $c->config->{require_ssl}->{ignore_on_post} )) {
-    my $uri = $c->req->uri;
+    my $uri = $c->req->uri->clone;
     $uri->scheme('http');
     $c->res->redirect( $uri );
     $c->detach();
