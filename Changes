@@ -1,3 +1,8 @@
+{{$NEXT}}
+
+- Fix URI building process
+- Update dzil setup
+
 0.06
 
 - Fix for RT#55804
