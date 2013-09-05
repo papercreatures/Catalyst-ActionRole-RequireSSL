@@ -69,7 +69,7 @@ Simon Elliott <cpan@papercreatures.com>
 
 Andy Grundman, <andy@hybridized.org> for the original RequireSSL Plugin
 
-t0m (Tomas Doran), zamolxes (Bogdan Lucaciu)
+t0m (Tomas Doran), zamolxes (Bogdan Lucaciu), wreis (Wallace Reis)
 
 =head1 COPYRIGHT & LICENSE
 
