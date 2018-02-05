@@ -25,7 +25,7 @@
 
 - Allow chained actions to override parent SSL defaults. This
 will allow you to make every action under a chain not ssl, or an action under
-a Does("RequireSSL") chain Plain. 
+a Does("RequireSSL") chain Plain.
 - Tests
 
 0.01

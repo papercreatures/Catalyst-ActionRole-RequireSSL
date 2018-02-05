@@ -9,7 +9,7 @@ our $VERSION = '0.07';
 Catalyst::ActionRole::RequireSSL::Role - Roles.
 
 =head1 SYNOPSIS
-   
+
 =cut
 
 my @ignore_chain = qw/Catalyst::ActionRole::NoSSL Catalyst::ActionRole::RequireSSL/;
@@ -17,7 +17,7 @@ my @ignore_chain = qw/Catalyst::ActionRole::NoSSL Catalyst::ActionRole::RequireS
 #check we are most relevant action
 sub check_chain {
   my ($self,$c) = @_;
-  return $c->config->{require_ssl}->{path_cache}->{$c->action->private_path} 
+  return $c->config->{require_ssl}->{path_cache}->{$c->action->private_path}
     eq $self->private_path
       if $c->config->{require_ssl}->{path_cache}->{$c->action->private_path};
   if($c->action->can('chain')) {
@@ -29,7 +29,7 @@ sub check_chain {
           return $action->private_path eq $self->private_path;
         }
       }
-    }  
+    }
   }
   return 1;
 }

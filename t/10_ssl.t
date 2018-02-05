@@ -29,7 +29,7 @@ is( $res->content, 'Unsecured', "Correctly detached and didn't run action");
 ok( $res = request('http://localhost/ssl/ssl?a=1&b=2&c=3'), 'request ok' );
 is( $res->header('location'), 'https://localhost/ssl/ssl?a=1&b=2&c=3', 'SSL with GET' );
 
-my $request = POST( 'http://localhost/ssl/ssl', 
+my $request = POST( 'http://localhost/ssl/ssl',
     'Content'      => '',
     'Content-Type' => 'application/x-www-form-urlencoded'
 );
@@ -50,10 +50,10 @@ is( $res->header('location'), 'http://localhost/plain/plain', 'Correct URI' );
 
 ok( $res = request('http://localhost/ssl/plain_chained/ssl'), 'request ok' );
 is( $res->code, 302, 'redirected to SSL' );
-is( $res->header('location'), 
+is( $res->header('location'),
   'https://localhost/ssl/plain_chained/ssl', 'Correct URI' );
 
 ok( $res = request('https://localhost/ssl/plain_chained/plain'), 'request ok' );
 is( $res->code, 302, 'redirected to Plain' );
-is( $res->header('location'), 
+is( $res->header('location'),
   'http://localhost/ssl/plain_chained/plain', 'Correct URI' );
