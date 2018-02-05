@@ -33,8 +33,10 @@ my $request = POST( 'http://localhost/ssl/ssl',
     'Content'      => '',
     'Content-Type' => 'application/x-www-form-urlencoded'
 );
+$ENV{TEST_VERBOSE} or TestApp->log->disable('error');
 ok( $res = request($request), 'request ok' );
 is( $res->code, 500, 'POST causes death' );
+TestApp->log->enable('error');
 
 ok( $res = request('https://localhost/ssl/plain'), 'request ok' );
 is( $res->code, 302, 'SSL request to Plain redirected' );
