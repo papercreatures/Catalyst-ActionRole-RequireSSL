@@ -16,7 +16,7 @@ is( $res->code, 200, 'SSL request to SSL' );
 my $ctx;
 ok( ($res, $ctx) = ctx_request('https://localhost/root_plain'), 'request ok' );
 is($ctx->request->uri->scheme, 'https');
-is( $res->code, 302, 'SSL request to Plain redirected' );
+is( $res->code, 301, 'SSL request to Plain redirected' );
 is( $res->header('location'), 'http://localhost/root_plain', 'Correct URI' );
 
 #chained tests
@@ -39,23 +39,23 @@ is( $res->code, 500, 'POST causes death' );
 TestApp->log->enable('error');
 
 ok( $res = request('https://localhost/ssl/plain'), 'request ok' );
-is( $res->code, 302, 'SSL request to Plain redirected' );
+is( $res->code, 301, 'SSL request to Plain redirected' );
 is( $res->header('location'), 'http://localhost/ssl/plain', 'Correct URI' );
 
 ok( $res = request('http://localhost/plain/ssl'), 'request ok' );
-is( $res->code, 302, 'redirected to SSL' );
+is( $res->code, 301, 'redirected to SSL' );
 is( $res->header('location'), 'https://localhost/plain/ssl', 'Correct URI' );
 
 ok( $res = request('https://localhost/plain/plain'), 'request ok' );
-is( $res->code, 302, 'redirected to Plain' );
+is( $res->code, 301, 'redirected to Plain' );
 is( $res->header('location'), 'http://localhost/plain/plain', 'Correct URI' );
 
 ok( $res = request('http://localhost/ssl/plain_chained/ssl'), 'request ok' );
-is( $res->code, 302, 'redirected to SSL' );
+is( $res->code, 301, 'redirected to SSL' );
 is( $res->header('location'),
   'https://localhost/ssl/plain_chained/ssl', 'Correct URI' );
 
 ok( $res = request('https://localhost/ssl/plain_chained/plain'), 'request ok' );
-is( $res->code, 302, 'redirected to Plain' );
+is( $res->code, 301, 'redirected to Plain' );
 is( $res->header('location'),
   'http://localhost/ssl/plain_chained/plain', 'Correct URI' );

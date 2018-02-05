@@ -30,7 +30,7 @@ around execute => sub {
       $c->config->{require_ssl}->{ignore_on_post} )) {
     my $uri = $c->req->uri->clone;
     $uri->scheme('http');
-    $c->res->redirect( $uri );
+    $c->res->redirect( $uri, 301 );
     $c->detach();
   } else {
     $self->$orig( @_ );

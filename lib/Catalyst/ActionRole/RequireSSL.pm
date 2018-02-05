@@ -49,7 +49,7 @@ around execute => sub {
     ) {
     my $uri = $c->req->uri->clone;
     $uri->scheme('https');
-    $c->res->redirect( $uri );
+    $c->res->redirect( $uri, 301 );
     $c->detach();
   } else {
     $c->log->warn("Would've redirected to SSL")
