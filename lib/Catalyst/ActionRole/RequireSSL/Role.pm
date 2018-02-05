@@ -14,7 +14,14 @@ Catalyst::ActionRole::RequireSSL::Role - Roles.
 
 my @ignore_chain = qw/Catalyst::ActionRole::NoSSL Catalyst::ActionRole::RequireSSL/;
 
-#check we are most relevant action
+=head1 METHODS
+
+=head2 check_chain($c)
+
+check we are most relevant action
+
+=cut
+
 sub check_chain {
   my ($self,$c) = @_;
   return $c->config->{require_ssl}->{path_cache}->{$c->action->private_path}
