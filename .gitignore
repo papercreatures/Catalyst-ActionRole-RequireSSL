@@ -1,0 +1,7 @@
+# files from Apple file manager
+.DS_Store
+
+# Dist::Zilla build files
+/.build/
+Catalyst-ActionRole-RequireSSL-0.07.tar.gz
+Catalyst-ActionRole-RequireSSL-0.07/
